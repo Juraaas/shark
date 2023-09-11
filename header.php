@@ -13,21 +13,20 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
 <body <?php body_class(); ?>>
 
-	<nav class="navbar navbar-expand-lg py-4 me-5 nav-scroll-1">
+	<nav class="navbar navbar-expand-lg py-4 nav-scroll-1 <?php echo !is_front_page() ? "second_page" : ""  ?> ">
 
   		<div class="container mb-2 mt-5">
                     
                     <div class="d-lg-flex justify-content-center w-100 gap-4">
                         
                         <div class="d-flex justify-content-between mb-2 mb-lg-0">
-	                        <a href="/" class="me-4">
-								<img class="mt-2" src="<?php echo get_stylesheet_directory_uri(); ?>/img/shark-logo1.png"/> 
+	                        <a href="http://localhost/stronka-wp/" class="me-4">
+								<img class="mt-2" src="<?php echo get_stylesheet_directory_uri(); ?> <?php echo is_front_page() ? "/img/shark-logo1.png" : "/img/shark-logo2.png" ?>"/> 
 	                        </a>    
 	                        
 	                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">

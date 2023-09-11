@@ -155,9 +155,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="slider-scrollbar-wrapper">
-                            <div id="slider-scrollbar" class="slider-scrollbar-item"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -196,59 +193,21 @@
             </div>
 </div>
 </section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-            // Inicjalizacja paska przewijania
-            const scrollbar = document.getElementById('slider-scrollbar');
-            const scrollbarWrapper = document.querySelector('.slider-scrollbar-wrapper');
+let items = document.querySelectorAll('.carousel .carousel-item')
 
-            // Inicjalizacja karuzeli
-            const carousel = document.getElementById('recipeCarousel');
-            const carouselInner = carousel.querySelector('.carousel-inner');
-            const items = carousel.querySelectorAll('.carousel-item');
-            const itemWidth = items[0].offsetWidth + 10; // 10px odstępu między elementami
-            const carouselWidth = itemWidth * items.length;
-
-            // Ustawić szerokość karuzeli na podstawie zawartości
-            carousel.style.width = `${carouselWidth}px`;
-
-            // Ustawić szerokość paska przewijania na podstawie zawartości
-            scrollbar.style.width = `${(carousel.clientWidth / carouselWidth) * 100}%`;
-
-            // Przewijanie za pomocą paska przewijania
-            scrollbar.addEventListener('mousedown', (e) => {
-                const initialX = e.clientX;
-                const initialLeft = parseFloat(getComputedStyle(scrollbar).left) || 0;
-
-                document.addEventListener('mousemove', onMouseMove);
-                document.addEventListener('mouseup', onMouseUp);
-
-                function onMouseMove(e) {
-                    const deltaX = e.clientX - initialX;
-                    let newLeft = initialLeft + deltaX;
-
-                    if (newLeft < 0) {
-                        newLeft = 0;
-                    } else if (newLeft + scrollbar.clientWidth > scrollbarWrapper.clientWidth) {
-                        newLeft = scrollbarWrapper.clientWidth - scrollbar.clientWidth;
-                    }
-
-                    scrollbar.style.left = `${newLeft}px`;
-
-                    const scrollRatio = newLeft / (scrollbarWrapper.clientWidth - scrollbar.clientWidth);
-                    const maxScroll = carouselWidth - carousel.clientWidth;
-                    const scrollPosition = Math.round(scrollRatio * maxScroll);
-
-                    carouselInner.style.transform = `translateX(-${scrollPosition}px)`;
-                }
-
-                function onMouseUp() {
-                    document.removeEventListener('mousemove', onMouseMove);
-                    document.removeEventListener('mouseup', onMouseUp);
-                }
-            });
-        });
+items.forEach((el) => {
+    const minPerSlide = 4
+    let next = el.nextElementSibling
+    for (var i=1; i<minPerSlide; i++) {
+        if (!next) {
+        	next = items[0]
+      	}
+        let cloneChild = next.cloneNode(true)
+        el.appendChild(cloneChild.children[0])
+        next = next.nextElementSibling
+    }
+})
 </script>
 <?php get_footer(); ?>
 
